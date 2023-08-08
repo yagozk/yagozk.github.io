@@ -67,6 +67,10 @@ function levelSelection() {
 
 function startGame() {
   levelSelection();
+  leftBtn.style.display = "inline";
+  rightBtn.style.display = "inline";
+  shootBtn.style.display = "inline";
+
   console.log("Game mode is set as " + gameMode.id);
   gameMode.style.display = "block";
   // Call the function on page load to initialize the size
@@ -402,9 +406,9 @@ function endGame(result) {
   document.removeEventListener("click", movePlayerRight);
   document.removeEventListener("click", fireBullet);
   // Remove mobile controls too
-  leftBtn.removeEventListener("click", movePlayerLeft);
-  rightBtn.removeEventListener("click", movePlayerRight);
-  shootBtn.removeEventListener("click", fireBullet);
+  leftBtn.style.display = "none";
+  rightBtn.style.display = "none";
+  shootBtn.style.display = "none";
 
   if (result === "win") {
     document.getElementById("game-won").style.display = "block";
