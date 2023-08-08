@@ -124,8 +124,6 @@ function resizeGameContainer() {
 }
 
 function resizePlayer() {
-  player.style.width = "50px";
-  player.style.height = "30px";
   player.style.bottom = gameContainer.offsetHeight * 0.02 + "px";
 }
 
@@ -400,6 +398,10 @@ function checkCollision(bullets, interval) {
 function endGame(result) {
   clearInterval(moveInterval); // Stop the invaders' movement
   document.removeEventListener("keydown", handleKeyPress); // Remove keydown event listener
+  document.removeEventListener("click", movePlayerLeft);
+  document.removeEventListener("click", movePlayerRight);
+  document.removeEventListener("click", fireBullet);
+  // Remove mobile controls too
   document.removeEventListener("click", movePlayerLeft);
   document.removeEventListener("click", movePlayerRight);
   document.removeEventListener("click", fireBullet);

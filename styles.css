@@ -66,6 +66,16 @@ body {
   position: absolute;
   left: 50%; /* Start the player in the center of the container */
   transform: translateX(-50%);
+  width: 50px;
+  height: 30px;
+}
+
+@media (max-width: 768px) {
+  #player {
+    width: 25px;
+    height: 15px;
+    background-size: cover;
+  }
 }
 
 .bullet {
