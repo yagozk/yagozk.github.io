@@ -402,9 +402,9 @@ function endGame(result) {
   document.removeEventListener("click", movePlayerRight);
   document.removeEventListener("click", fireBullet);
   // Remove mobile controls too
-  document.removeEventListener("click", movePlayerLeft);
-  document.removeEventListener("click", movePlayerRight);
-  document.removeEventListener("click", fireBullet);
+  leftBtn.removeEventListener("click", movePlayerLeft);
+  rightBtn.removeEventListener("click", movePlayerRight);
+  shootBtn.removeEventListener("click", fireBullet);
 
   if (result === "win") {
     document.getElementById("game-won").style.display = "block";
