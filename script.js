@@ -35,6 +35,18 @@ let gameContainerHeight;
 
 let playerScore = 0;
 
+const invaderMoveSound1 = document.getElementById("invaderMoveSound1");
+const invaderMoveSound2 = document.getElementById("invaderMoveSound2");
+const invaderMoveSound3 = document.getElementById("invaderMoveSound3");
+const invaderMoveSound4 = document.getElementById("invaderMoveSound4");
+const invaderMoveSounds = [
+  invaderMoveSound1,
+  invaderMoveSound2,
+  invaderMoveSound3,
+  invaderMoveSound4,
+];
+let invadersMoveSoundIndex = 0;
+
 function levelSelection() {
   if (document.getElementById("regular-mode-radio").checked) {
     gameMode = document.getElementById("regular-mode");
@@ -523,8 +535,11 @@ function startSaucer3Firing() {
 }
 
 function playInvaderMoveSound() {
-  const invaderMoveSound = document.getElementById("invaderMoveSound");
-  invaderMoveSound.play();
+  if (invadersMoveSoundIndex == 4) {
+    invadersMoveSoundIndex = 0;
+  }
+  invaderMoveSounds[invadersMoveSoundIndex].play();
+  invadersMoveSoundIndex++;
 }
 
 function playPlayerShootSound() {

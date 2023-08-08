@@ -1,0 +1,1 @@
+The game is available at: https://yagozk.github.io/
