@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <audio id="invaderMoveSound" src="sounds/fastinvader1.wav"></audio>
+    <audio id="playerShootSound" src="sounds/shoot.wav"></audio>
+    <audio id="invaderKilledSound" src="sounds/invaderkilled.wav"></audio>
+  </head>
+  <body>
+    <div class="row container">
+      <div class="col">
+        <div class="home-screen mt-5">
+          <h1 style="color: rgb(184, 116, 248)">SPACE INVADERS</h1>
+          <h4 class="mt-4 text-info">How to Play</h4>
+          <p>
+            Use the arrow keys to move your ship and the spacebar to shoot.
+            Destroy all the invaders before they reach the bottom of the screen.
+            If you get hit, the game is over!
+          </p>
+          <h4 class="mt-4 text-info">Select Level</h4>
+          <div class="form-check" id="level-select">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="game-mode"
+              id="regular-mode-radio"
+              value="regular"
+              checked
+            />
+            <label class="form-check-label" for="regular-mode-radio">
+              Regular:
+              <span class="text-secondary"
+                >The classic Space Invaders experience</span
+              >
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="game-mode"
+              id="bullet-hell-mode-radio"
+              value="bullet-hell"
+            />
+            <label class="form-check-label" for="bullet-hell-mode-radio">
+              Bullet Hell:
+              <span class="text-secondary"
+                >Less invaders, much more bullets!</span
+              >
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="game-mode"
+              id="double-fire-mode-radio"
+              value="double-fire"
+            />
+            <label class="form-check-label" for="bullet-hell-mode-radio">
+              Double Fire:
+              <span class="text-secondary"
+                >There are a lot more invaders, but you shoot double
+                bullets!</span
+              >
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="game-mode"
+              id="machine-gun-mode-radio"
+              value="machine-gun-mode"
+            />
+            <label class="form-check-label" for="bullet-hell-mode-radio">
+              Machine Gun:
+              <span class="text-secondary"
+                >You can shoot much more rapidly, but so can the invaders!</span
+              >
+            </label>
+          </div>
+
+          <button class="btn btn-outline-primary mt-4" id="start-game-btn">
+            Start Game
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col d-flex justify-content-center align-items-center">
+        <div class="game-win-screen m-4 p-4 container" id="game-won">
+          <h1>You won! Congratulations!</h1>
+          <button class="btn btn-outline-primary" id="win-go-home-btn">
+            Go to Homepage
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col d-flex justify-content-center align-items-center">
+        <div class="game-lost-screen m-4 p-4 container" id="game-lost">
+          <h1>Game over!</h1>
+          <button class="btn btn-outline-primary" id="lost-go-home-btn">
+            Go to Homepage
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col d-flex justify-content-center align-items-center">
+        <div id="game-container">
+          <div id="regular-mode" style="display: none">
+            <div class="invader-line saucer3-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer2-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer2-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer1-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer1-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+          </div>
+          <div id="bullet-hell-mode" style="display: none">
+            <div class="invader-line saucer3-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer3-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer3-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+          </div>
+          <div id="double-fire-mode" style="display: none">
+            <div class="invader-line saucer3-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer2-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer2-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer2-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+
+            <div class="invader-line saucer1-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer1-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer1-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+          </div>
+          <div id="machine-gun-mode" style="display: none">
+            <div class="invader-line saucer3-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer2-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer2-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer1-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+            <div class="invader-line saucer1-line">
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+              <div class="invader"></div>
+            </div>
+          </div>
+
+          <div id="player"></div>
+          <div class="overlay-menu" id="overlay-menu">
+            <h2>Game Paused</h2>
+            <div>
+              <button class="btn btn-primary" id="continue-btn">
+                Continue Game
+              </button>
+              <button class="btn btn-danger" id="exit-btn">Quit Game</button>
+            </div>
+          </div>
+          <div class="pause-button">
+            <button class="btn btn-lg btn-outline-info" id="pause-btn">
+              <span class="material-symbols-outlined"> pause </span>
+            </button>
+          </div>
+          <div class="mute-button">
+            <button class="btn btn-lg btn-outline-info" id="volume-btn">
+              <span class="material-symbols-outlined"> volume_off </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="score-div text-center" id="score-div">
+      <h2>Score: <span id="score" class="text-primary">0 points</span></h2>
+    </div>
+    <div class="mobile-controls">
+      <div class="row mt-4">
+        <div class="col d-flex justify-content-center align-items-center">
+          <div class="mobile-controls-container">
+            <button class="btn btn-lg btn-outline-primary" id="left-btn">
+              <span class="material-symbols-outlined"> arrow_back </span>
+            </button>
+            <button class="btn btn-lg btn-outline-primary" id="shoot-btn">
+              Shoot
+            </button>
+            <button class="btn btn-lg btn-outline-primary" id="right-btn">
+              <span class="material-symbols-outlined"> arrow_forward </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

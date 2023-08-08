@@ -1,0 +1,129 @@
+body {
+  font-family: "Press Start 2P", sans-serif !important;
+
+  background-image: url("images/space_background_img.jpg");
+  background-size: repeat;
+  color: white !important;
+}
+
+#game-container {
+  display: none; /* Game container is initially hidden */
+  width: 50%;
+  height: 50%;
+  background-color: #000;
+  position: relative; /* Add position relative to use absolute positioning for invaders */
+  border: #00ffcc 5px solid;
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 1200px) {
+  #game-container {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #game-container {
+    width: 75%;
+  }
+}
+
+/* Add media query for smaller screen sizes */
+@media screen and (max-width: 768px) {
+  #game-container {
+    width: 100%;
+    margin-top: 0px;
+  }
+}
+
+.invader-line {
+  display: flex;
+  justify-content: center;
+}
+
+.saucer3-line .invader {
+  background-image: url("icons/saucer3b.ico");
+}
+
+.saucer2-line .invader {
+  background-image: url("icons/saucer2b.ico");
+}
+
+.saucer1-line .invader {
+  background-image: url("icons/saucer1b.ico");
+}
+
+.invader {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  margin: 5px;
+  position: absolute;
+}
+
+#player {
+  background-image: url("icons/baseshipb.ico");
+  position: absolute;
+  left: 50%; /* Start the player in the center of the container */
+  transform: translateX(-50%);
+}
+
+.bullet {
+  background-color: #03fb5e;
+  position: absolute;
+}
+
+.overlay-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.overlay-menu h2 {
+  margin-bottom: 20px;
+}
+
+.pause-button {
+  position: absolute;
+  top: 10px; /* Adjust the top value to control the vertical position */
+  right: 10px; /* Adjust the right value to control the horizontal position */
+  z-index: 999;
+}
+
+.mute-button {
+  position: absolute;
+  top: 10px; /* Adjust the top value to control the vertical position */
+  left: 10px; /* Adjust the right value to control the horizontal position */
+  z-index: 999;
+}
+
+.mobile-controls {
+  display: none;
+}
+
+.game-win-screen {
+  display: none;
+}
+
+.game-lost-screen {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-controls {
+    display: block;
+  }
+}
+
+.score-div {
+  display: none;
+}
