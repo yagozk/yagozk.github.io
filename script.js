@@ -67,9 +67,9 @@ function levelSelection() {
 
 function startGame() {
   levelSelection();
-  leftBtn.style.display = "inline";
-  rightBtn.style.display = "inline";
-  shootBtn.style.display = "inline";
+  leftBtn.disabled = false;
+  rightBtn.disabled = false;
+  shootBtn.disabled = false;
 
   console.log("Game mode is set as " + gameMode.id);
   gameMode.style.display = "block";
@@ -406,9 +406,9 @@ function endGame(result) {
   document.removeEventListener("click", movePlayerRight);
   document.removeEventListener("click", fireBullet);
   // Remove mobile controls too
-  leftBtn.style.display = "none";
-  rightBtn.style.display = "none";
-  shootBtn.style.display = "none";
+  leftBtn.disabled = true;
+  rightBtn.disabled = true;
+  shootBtn.disabled = true;
 
   if (result === "win") {
     document.getElementById("game-won").style.display = "block";
