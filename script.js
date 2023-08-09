@@ -554,18 +554,28 @@ function playInvaderKilledSound() {
 
 // Function to toggle the audio volume on and off
 function toggleVolume() {
-  const invaderMoveSound = document.getElementById("invaderMoveSound");
+  const invaderMoveSound = document.getElementById("invaderMoveSound1");
+  const invaderMoveSound2 = document.getElementById("invaderMoveSound2");
+  const invaderMoveSound3 = document.getElementById("invaderMoveSound3");
+  const invaderMoveSound4 = document.getElementById("invaderMoveSound4");
   const playerShootSound = document.getElementById("playerShootSound");
   const invaderKilledSound = document.getElementById("invaderKilledSound");
 
   // Check if any of the sounds are currently muted
   const isMuted =
-    invaderMoveSound.muted ||
+    invaderMoveSound1.muted ||
+    invaderMoveSound2.muted ||
+    invaderMoveSound3.muted ||
+    invaderMoveSound4.muted ||
     playerShootSound.muted ||
     invaderKilledSound.muted;
 
   // Toggle the mute state for all audio elements
-  invaderMoveSound.muted = !isMuted;
+  invaderMoveSound1.muted = !isMuted;
+  invaderMoveSound2.muted = !isMuted;
+  invaderMoveSound3.muted = !isMuted;
+  invaderMoveSound4.muted = !isMuted;
+
   playerShootSound.muted = !isMuted;
   invaderKilledSound.muted = !isMuted;
 
